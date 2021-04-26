@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Check Loan Eligebilty Results</title>
+<style type="text/css">
+	span {
+        display: inline-block;
+        width: 280px;
+        text-align: left;
+    }	
+</style>
+</head>
+<body>
+<div align="center">
+	<h2> Check Results</h2>
+	<span>Customer eligeble ? : </span> <span th:text="${response.isEligeble}"></span><br/>
+	<span>Approved amount ? : </span> <span th:text="${response.approvedAmount}"></span><br/>
+	<div th:if="${not #lists.isEmpty(response.criteriaMismatch)}">
+		<h4> Reasons why is not accepted</h4>
+		<div th:each="reason, state : ${response.criteriaMismatch}">
+			<span th:text="'Reason '+${state.index+1}+' :'"> </span> <span th:text="${reason}"></span><br/>
+		</div>
+	</div>
+</div>
+</body>
+</html>

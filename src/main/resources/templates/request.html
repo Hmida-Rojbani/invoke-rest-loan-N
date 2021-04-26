@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Check Loan Eligebilty</title>
+<style type="text/css">
+label {
+	display: inline-block;
+	width: 200px;
+	margin: 5px;
+	text-align: left;
+}
+
+input[type=text], input[type=password], input[type=number], input[type=range],
+	select {
+	display: inline-block;
+	width: 200px;
+}
+
+input[type=radio] {
+	margin-left: 45px;
+}
+
+input[type=checkbox] {
+	margin-right: 190px;
+}
+
+button {
+	padding: 5px;
+	margin: 10px;
+}
+</style>
+</head>
+<body>
+
+<div align="center">
+	<h2> Check Customer Form </h2>
+	<form action="#" th:action="@{/check/customer}" method="post" th:object="${request}">
+		<label> Customer Name :</label>
+		<input type="text"  th:field="*{customerName}" /> <br/>
+		
+		<label> Age :</label>
+		<input type="number" min=18 max=90 th:field="*{age}" /> <br/>
+		
+		<label> Yearly income :</label>
+		<input type="number" min=0  th:field="*{yearlyIncome}" /> <br/>
+		
+		<label> Cibil score :</label>
+		<input type="range" min=1 max=999 th:field="*{cibilScore}" 
+		oninput= "this.nextElementSibling.value= this.value"/> <output> 500 </output> <br/>
+		
+		<label> Employment mode :</label>
+		<select th:field="*{employmentMode}">
+			<option th:each=" mode : ${T(de.tekup.loan.invoke.ui.types.EmpMode).values()}"
+			th:value="${mode.name}" th:text="${mode.name}"> </option>
+		</select> <br/>
+		<button type="submit"> Check </button>
+	</form>
+</div>
+
+</body>
+</html>
